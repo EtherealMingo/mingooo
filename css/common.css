@@ -3,24 +3,32 @@
     padding: 0;
     text-decoration: none;
     list-style: none;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
+    /* background-color: #7a7374; */
 }
 .wrapper {
     width: 100%;
     height: 100vh;
     position: fixed;
+    background-image: url(../images/texture.png);
+    transition: background-color 2s ease-in;
+    background-color: #ddd;
     display: flex;
+    z-index: -110;
 }
 
 /* 左侧的导航 */
 .left {
     width: 18%;
     height: 100%;
-    background-color: antiquewhite;
+    border-right: 1px dotted black;
+    /* background-color: antiquewhite; */
 }
 .left .logo h1 {
     margin-top: 40px;
     text-align: center;
+    font-family: "Chancery", cursive, LiSu, sans-serif;
     font-size: xx-large;
     font-weight: bold;
 }
@@ -38,32 +46,23 @@
 .left ul li a {
     font-size: 16px;
     line-height: 30px;
-    padding: 10px 20px;
+    padding: 5px 20px;
+    margin: 2px 0;
     color: rgb(17, 15, 15);
 }
 .left ul li a:hover {
-    color: crimson;
+    color: #ffffff;
+    background: linear-gradient(90deg, #0072ff 0%, #00d4ff 100%);
+    border-radius: 5px;
 }
 /* .left ul li a:visited {
     color: rgb(255, 208, 0);
 } */
-/* 左侧导航样式结束 */
-
-/* aside侧边设置宽度 */
-
-/* 右侧主体样式开始 */
-
 .right {
     flex: 1;
     height: 100%;
     overflow: auto;
 }
-.right .showSearch {
-    height: 80px;
-    border-bottom: 1px solid black;
-}
-
-/* 右侧导航样式开始 */
 .mod_content {
     display: flex;
 }
@@ -92,8 +91,10 @@
 .module .contents a {
     text-align: start;
     color: rgb(41, 37, 37);
+    padding: 4px 6px;
 }
 .module .contents a:hover {
-    color: rgb(248, 112, 1);
-    text-shadow: rgb(238, 114, 114) 0 0 5px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #0072ff 0%, #00d4ff 100%);
+    border-radius: 5px;
 }

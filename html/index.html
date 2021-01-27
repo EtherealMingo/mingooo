@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mingooo</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <style>
+      /* 右侧主体样式开始 */
+      /* 右侧导航样式开始 */
+      .right {
+        display: flex;
+        justify-content: center;
+      }
+      .input_group {
+        width: 100%;
+      }
+      .input_group_header {
+        margin-top: 15%;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+        color: #36292f;
+      }
+      #searchForm {
+        display: flex;
+        justify-content: center;
+        padding: 2% 0 1.4% 0;
+      }
+      #search {
+        width: 50%;
+        height: 36px;
+        font-size: 18px;
+        color: rgb(58, 58, 58);
+        border-radius: 5px;
+        border: whitesmoke 3px solid;
+      }
+      .botton_group {
+        display: block;
+        text-align: center;
+      }
+      .btn {
+        width: 5%;
+        margin-left: 1%;
+      }
+      #baidu,
+      #sougou,
+      #weixin,
+      #zhihu,
+      #weibo,
+      #douban {
+        border-radius: 5px;
+      }
+      #baidu {
+        color: #2b32d8;
+        border-color: #2b32d8;
+      }
+      #sougou {
+        color: #eb632c;
+        border-color: #eb632c;
+      }
+      #weixin {
+        color: #51aa38;
+        border-color: #51aa38;
+      }
+      #zhihu {
+        color: #2a64f6;
+        border-color: #2a64f6;
+      }
+      #weibo {
+        color: #d33437;
+        border-color: #d33437;
+      }
+      #douban {
+        color: #4e9448;
+        border-color: #4e9448;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="left">
+        <div class="logo">
+          <h1>Mingooo</h1>
+          <p>社会乱象,根源在我.</p>
+        </div>
+        <ul>
+          <li><a href="../html/index.html">首页</a></li>
+          <li><a href="../html/project.html">项目</a></li>
+          <li><a href="../html/resource.html">资源</a></li>
+          <li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=aAUBBg8HRg0FCQEEKBkZRgsHBQ" style="text-decoration: none">联系</a></li>
+          <li><a href="../html/about.html">关于</a></li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="input_group">
+          <div class="input_group_header">全能搜</div>
+          <form action="http://www.baidu.com/baidu" method="get" target="_blank" id="searchForm">
+            <input type="text" name="word" id="search" placeholder="先输入关键词" baiduSug="2" value="" />
+          </form>
+          <div class="botton_group">
+            <button type="submit" value="百度" class="btn" id="baidu" onclick="">百度</button>
+            <button type="submit" value="搜狗" class="btn" id="sougou" onclick="">搜狗</button>
+            <button type="submit" value="微信" class="btn" id="weixin" onclick="">微信</button>
+            <button type="submit" value="知乎" class="btn" id="zhihu" onclick="">知乎</button>
+            <button type="submit" value="微博" class="btn" id="weibo" onclick="">微博</button>
+            <button type="submit" value="豆瓣" class="btn" id="douban" onclick="">豆瓣</button>
+          </div>
+        </div>
+        <div>
+          <dl>
+            <dt>参考</dt>
+            <dd><a href="https://stackoverflow.com/">Stack Overflow</a></dd>
+            <dd><a href="https://github.com/">Github</a></dd>
+            <dd><a href="https://github.com/">Gittee</a></dd>
+            <dd><a href="https://segmentfault.com/">SegmentFault</a></dd>
+            <dd><a href="https://leetcode-cn.com/">LeetCode</a></dd>
+            <dd><a href="https://juejin.cn/">掘金</a></dd>
+            <dd><a href="https://www.oschina.net/">开源中国</a></dd>
+            <dd><a href="https://blog.csdn.net/">CSDN</a></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+      window.onload = async function () {
+        let sentence = await $.get('http://v1.hitokoto.cn?c=d&c=e&c=k&c=h', {
+          encode: 'json',
+          charset: 'utf-8',
+        })
+        console.log(sentence)
+        $('.input_group_header').html(sentence.hitokoto)
+        //百度
+        $('#baidu').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + query, '_blank')
+            return false
+          }
+        })
+
+        //搜狗
+        $('#sougou').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('https://www.sogou.com/web?query=' + query, '_blank')
+            return false
+          }
+        })
+
+        //微信  恢复上线
+        $('#weixin').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('http://weixin.sogou.com/weixin?type=2&query=' + query + '&ie=utf8', '_blank')
+            return false
+          }
+        })
+
+        //知乎
+        $('#zhihu').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('https://www.zhihu.com/search?type=content&q=' + query, '_blank')
+            return false
+          }
+        })
+
+        //微博
+        $('#weibo').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('http://s.weibo.com/weibo/' + query, '_blank')
+            return false
+          }
+        })
+
+        //豆瓣
+        $('#douban').click(function () {
+          var query = $('#search').val()
+          if (query) {
+            window.open('https://www.douban.com/search?source=suggest&q=' + query, '_blank')
+            return false
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

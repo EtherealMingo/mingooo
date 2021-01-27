@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mingo记事本</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-image: url(../../images/texture.png);
+        transition: background-color 2s ease-in;
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        z-index: -110;
+      }
+      #todoApp {
+        width: 400px;
+        margin-top: 15%;
+        border: 1px solid #eeeeee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+      }
+      .header {
+        width: 350px;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        color: rgb(250, 121, 99);
+        font-weight: 200;
+        text-align: center;
+      }
+      .new-todo {
+        display: inline-block;
+        width: 344px;
+        height: 30px;
+        font-size: larger;
+        color: #615f5f;
+        border: 1px solid #eeeeee;
+      }
+      .main {
+        width: 350px;
+        text-decoration: none;
+      }
+      .todoList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        border-left: 1px solid #eeeeee;
+        border-right: 1px solid #eeeeee;
+      }
+      .todo {
+        padding: 5px 10px;
+        line-height: 30px;
+        font-size: 20px;
+        font-weight: 300;
+        word-wrap: break-word;
+        border-bottom: 1px solid #eeeeee;
+        position: relative;
+      }
+      .index {
+        color: #615f5f;
+        margin-left: 20px;
+      }
+      .destroy {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: none;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: rgb(250, 121, 99);
+      }
+      .footer {
+        padding: 5px 0px;
+        width: 400px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .total,
+      .finish {
+        color: #615f5f;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <section id="todoApp">
+        <header class="header">
+          <h1>Mingo记事本</h1>
+          <input type="text" autofocus="true" autocomplete="off" placeholder="请输入任务" class="new-todo" v-model="inputValue" @keyup.enter="add" />
+        </header>
+        <section class="main">
+          <ul class="todoList">
+            <li class="todo" v-for="(item,index) in todoList">
+              <span class="index">{{ index +1}}.</span>
+              <label for="">{{ item }}</label>
+              <button class="destroy" @click="del(index)">×</button>
+            </li>
+          </ul>
+        </section>
+        <footer class="footer">
+          <div class="total">{{ total }}项待办</div>
+          <div class="finish">{{ finish }}项完成</div>
+        </footer>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      var app = new Vue({
+        el: '#todoApp',
+        data() {
+          return {
+            total: 0,
+            finish: 0,
+            todoList: ['写代码', '吃饭饭', '睡觉觉'],
+            inputValue: '打豆豆',
+          }
+        },
+        methods: {
+          //添加任务的方法
+          add() {
+            if (this.inputValue) {
+              this.todoList.push(this.inputValue) //向data数组列表中添加新的数组元素
+            } else {
+              alert('请输入任务后回车') //任务为空值时进行提示
+            }
+            this.inputValue = '' //任务添加后清空输入框内容
+            this.total = this.todoList.length //更新总任务数
+          },
+          //删除任务的方法
+          del(index) {
+            this.todoList.splice(index, 1) //删除的本质是在data数组列表中删除一个数组元素
+            this.total = this.todoList.length //更新总任务数
+            this.finish++ //完成的任务加一
+          },
+        },
+        //任务初次加载时显示总任务数
+        created() {
+          this.total = this.todoList.length
+        },
+      })
+    </script>
+  </body>
+</html>
